@@ -18,7 +18,7 @@ const ACTS: Act[] = [
   {
     title: 'Act 1 · Import what you already have',
     machine: 'laptop',
-    caption: 'gaal discovers installed skills and MCP servers across every agent.',
+    caption: 'gaal discovers skills and MCP across every agent.',
     lines: [
       { id: 'a1-01', kind: 'cmd', text: 'gaal init --import-all' },
       { id: 'a1-02', kind: 'out', text: 'Detected: Claude Code, Cursor, Codex' },
@@ -167,7 +167,7 @@ export default function TerminalDemo() {
                   </span>
                 </span>
               </div>
-              <div className="term-body min-h-[280px]">
+              <div className="term-body min-h-[24rem]">
                 <p className="mb-4 text-[0.7rem] uppercase tracking-wider text-[var(--fg-dim)]">
                   {a.title}
                 </p>

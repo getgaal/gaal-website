@@ -34,6 +34,8 @@ function HomePage() {
       <Problem />
       <TerminalDemoSection />
       <HowItWorks />
+      <ImportSection />
+      <InstallSection />
       <Coverage />
       <TrustRow />
       <FinalCta />
@@ -51,6 +53,17 @@ function Hero() {
       <HeroBackdrop />
 
       <div className="page-wrap relative">
+        {/* Soft lime halo, centered on the eyebrow's accent dot. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-[157px] -top-[150px] h-[320px] w-[320px] rounded-full"
+          style={{
+            background:
+              'radial-gradient(circle, rgba(222,255,154,0.18), transparent 62%)',
+            filter: 'blur(4px)',
+          }}
+        />
+
         <p className="eyebrow mb-6 rise-in">
           Governed Agent Access Layer · v1.0
         </p>
@@ -81,7 +94,7 @@ function Hero() {
         >
           <InstallBlock variant="hero" />
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:w-auto sm:justify-start">
             <a
               href={REPO}
               target="_blank"
@@ -126,7 +139,7 @@ function Hero() {
         </div>
 
         <p
-          className="mt-6 text-xs text-[var(--fg-dim)] rise-in"
+          className="mt-6 text-center text-xs text-[var(--fg-dim)] rise-in sm:text-left"
           style={{ animationDelay: '320ms' }}
         >
           macOS · Linux · Windows · or{' '}
@@ -142,16 +155,6 @@ function Hero() {
 function HeroBackdrop() {
   return (
     <>
-      {/* Soft lime halo */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-24 -top-24 h-[420px] w-[420px] rounded-full"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(222,255,154,0.18), transparent 60%)',
-          filter: 'blur(6px)',
-        }}
-      />
       {/* Subtle constellation dots */}
       <svg
         aria-hidden="true"
@@ -303,7 +306,7 @@ function HowItWorks() {
         </h2>
 
         <div className="grid gap-8 lg:grid-cols-5">
-          <div className="lg:col-span-3">
+          <div className="min-w-0 lg:col-span-3">
             <p className="lead mb-6">
               gaal reads a single <code>gaal.yaml</code>. It declares three
               things:
@@ -474,6 +477,183 @@ function YamlBlock() {
 }
 
 /* ======================================================================
+   5. IMPORT
+   ====================================================================== */
+
+function ImportSection() {
+  return (
+    <section id="import" className="section section-hairline">
+      <div className="page-wrap">
+        <p className="eyebrow mb-6">Import</p>
+        <h2 className="display mb-6 max-w-4xl">
+          Already using coding agents? gaal imports your setup{' '}
+          <span className="accent-word">in one command</span>.
+        </h2>
+        <p className="lead mb-12 max-w-2xl">
+          You don't start from a blank YAML. The first time you run{' '}
+          <code>gaal init --import-all</code>, gaal scans every coding agent on
+          your machine, collects the skills and MCP servers you've already
+          configured, and writes them to <code>gaal.yaml</code>. Your existing
+          setup becomes one file, version-controlled, ready to sync.
+        </p>
+
+        <div className="grid gap-10 lg:grid-cols-5">
+          <ol className="flex flex-col gap-8 lg:col-span-2">
+            <SequenceItem
+              n={1}
+              title="Install gaal"
+              body="Single Go binary. curl | sh. No dependencies, no account, no server."
+            />
+            <SequenceItem
+              n={2}
+              title="Run gaal init --import-all"
+              body="gaal auto-detects every installed agent and imports each skill and MCP server it finds."
+            />
+            <SequenceItem
+              n={3}
+              title="Commit gaal.yaml"
+              body="Review the generated file, tweak scopes if you want, drop it in your dotfiles repo. That's it."
+            />
+          </ol>
+
+          <div className="min-w-0 lg:col-span-3">
+            <ImportTerminal />
+            <p className="mt-5 text-sm text-[var(--fg-muted)]">
+              Every agent keeps its current behavior. gaal gives you one source
+              of truth without churn.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ImportTerminal() {
+  return (
+    <div className="term">
+      <div className="term-head">
+        <span className="term-dots" aria-hidden="true">
+          <span className="term-dot" />
+          <span className="term-dot" />
+          <span className="term-dot" />
+        </span>
+        <span className="ml-3 text-[var(--fg-muted)]">gaal init</span>
+      </div>
+      <pre className="term-body m-0 overflow-x-auto">
+        <code>
+          <span className="term-prompt">$</span>{' '}
+          <span className="term-cmd">gaal init --import-all</span>
+          {'\n'}
+          <span className="term-out">Scanning installed agents...</span>
+          {'\n\n'}
+          <span className="term-out">Detected: Claude Code, Cursor, Codex</span>
+          {'\n'}
+          <span className="term-arrow">→</span>{' '}
+          <span className="term-out">
+            8 skills imported from Claude Code
+          </span>
+          {'\n'}
+          <span className="term-arrow">→</span>{' '}
+          <span className="term-out">4 skills imported from Cursor</span>
+          {'\n'}
+          <span className="term-arrow">→</span>{' '}
+          <span className="term-out">4 MCP servers imported</span>
+          {'\n\n'}
+          <span className="term-ok">
+            ✓ gaal.yaml generated (47 lines, 12 skills, 4 MCPs)
+          </span>
+        </code>
+      </pre>
+    </div>
+  )
+}
+
+/* ======================================================================
+   6. INSTALL SKILLS (roadmap)
+   ====================================================================== */
+
+function InstallSection() {
+  return (
+    <section id="install" className="section section-hairline">
+      <div className="page-wrap">
+        <div className="mb-6 flex flex-wrap items-center gap-3">
+          <p className="eyebrow">Install</p>
+          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface-2)] px-3 py-1 text-[0.72rem] font-medium text-[var(--fg-muted)]">
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]"
+              style={{ boxShadow: '0 0 8px rgba(222,255,154,0.6)' }}
+            />
+            Coming in v1.1
+          </span>
+        </div>
+        <h2 className="display mb-6 max-w-4xl">
+          Install any skill with{' '}
+          <span className="accent-word">one command</span>.
+        </h2>
+        <p className="lead mb-12 max-w-2xl">
+          <code>gaal install</code> adds skills without ever opening{' '}
+          <code>gaal.yaml</code>. Point it at any GitHub repo, or pick a skill
+          from <code>skills.sh</code>, gaal's community registry. gaal resolves
+          the source, updates your YAML, and syncs every agent listed in your
+          config.
+        </p>
+
+        <div className="grid gap-6 lg:grid-cols-3">
+          <InstallCard
+            label="From GitHub"
+            command="gaal install obra/superpowers"
+            note="Any owner/repo. Full URLs and SSH paths accepted."
+          />
+          <InstallCard
+            label="From skills.sh"
+            command="gaal install effective-testing"
+            note="Curated community skills. Signed, reviewed, discoverable."
+          />
+          <InstallCard
+            label="Pin a version"
+            command="gaal install obra/superpowers@v2.1.0"
+            note="Tag, branch, or commit. Reproducible installs everywhere."
+          />
+        </div>
+
+        <p className="mt-10 max-w-2xl text-sm text-[var(--fg-muted)]">
+          Shipping in gaal v1.1. Today, declare skills directly in{' '}
+          <code>gaal.yaml</code>. The <code>source:</code> field already accepts
+          the same paths.
+        </p>
+      </div>
+    </section>
+  )
+}
+
+function InstallCard({
+  label,
+  command,
+  note,
+}: {
+  label: string
+  command: string
+  note: string
+}) {
+  return (
+    <article className="card flex flex-col gap-4">
+      <p className="font-mono text-[0.68rem] uppercase tracking-widest text-[var(--accent)]">
+        {label}
+      </p>
+      <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-0)] px-4 py-3 font-mono text-[0.82rem] text-white">
+        <span className="term-prompt mr-2 select-none" aria-hidden="true">
+          $
+        </span>
+        {command}
+      </div>
+      <p className="text-sm text-[var(--fg-muted)]">{note}</p>
+    </article>
+  )
+}
+
+/* ======================================================================
    4. TERMINAL DEMO
    ====================================================================== */
 
@@ -637,10 +817,10 @@ function FinalCta() {
           <span className="accent-word">repo</span>.
         </h2>
 
-        <div className="mb-14 flex flex-col items-start gap-4">
+        <div className="mb-14 flex flex-col items-center gap-4 sm:items-start">
           <InstallBlock />
           <a href={REPO} target="_blank" rel="noreferrer" className="cta-pair">
-            <span className="btn-pill secondary">
+            <span className="btn-pill primary">
               <svg
                 width="14"
                 height="14"
@@ -653,7 +833,7 @@ function FinalCta() {
               </svg>
               Star on GitHub
             </span>
-            <span className="btn-chevron ghost">
+            <span className="btn-chevron primary max-sm:!hidden">
               <svg
                 width="14"
                 height="14"
