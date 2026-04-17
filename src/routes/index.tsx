@@ -1,87 +1,713 @@
 import { createFileRoute } from '@tanstack/react-router'
+import InstallBlock from '../components/InstallBlock'
+import NewsletterForm from '../components/NewsletterForm'
+import TerminalDemo from '../components/TerminalDemo'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({ component: HomePage })
 
-function App() {
+const REPO = 'https://github.com/getgaal/gaal'
+
+const AGENTS: Array<string> = [
+  'Claude Code',
+  'Cursor',
+  'Codex',
+  'GitHub Copilot',
+  'Amp',
+  'Cline',
+  'Roo',
+  'Continue',
+  'Gemini CLI',
+  'Goose',
+  'Kilo',
+  'Kiro CLI',
+  'OpenCode',
+  'OpenHands',
+  'Trae',
+  'Warp',
+  'Windsurf',
+]
+
+function HomePage() {
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2rem] px-6 py-10 sm:px-10 sm:py-14">
-        <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(79,184,178,0.32),transparent_66%)]" />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(47,106,74,0.18),transparent_66%)]" />
-        <p className="island-kicker mb-3">TanStack Start Base Template</p>
-        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
-          Start simple, ship quickly.
-        </h1>
-        <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
-          This base starter intentionally keeps things light: two routes, clean
-          structure, and the essentials you need to build from scratch.
+    <main>
+      <Hero />
+      <Problem />
+      <TerminalDemoSection />
+      <HowItWorks />
+      <Coverage />
+      <TrustRow />
+      <FinalCta />
+    </main>
+  )
+}
+
+/* ======================================================================
+   1. HERO
+   ====================================================================== */
+
+function Hero() {
+  return (
+    <section className="section relative overflow-hidden pt-24 sm:pt-32">
+      <HeroBackdrop />
+
+      <div className="page-wrap relative">
+        <p className="eyebrow mb-6 rise-in">
+          Governed Agent Access Layer · v1.0
         </p>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="/about"
-            className="rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] no-underline transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)]"
-          >
-            About This Starter
-          </a>
-          <a
-            href="https://tanstack.com/router"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[rgba(23,58,64,0.2)] bg-white/50 px-5 py-2.5 text-sm font-semibold text-[var(--sea-ink)] no-underline transition hover:-translate-y-0.5 hover:border-[rgba(23,58,64,0.35)]"
-          >
-            Router Guide
+
+        <h1
+          className="display-hero mb-7 max-w-4xl rise-in"
+          style={{ animationDelay: '80ms' }}
+        >
+          One YAML. Every coding agent. Every{' '}
+          <span className="accent-word">machine</span>.
+        </h1>
+
+        <p
+          className="lead mb-10 max-w-2xl rise-in"
+          style={{ animationDelay: '160ms' }}
+        >
+          Stop copy-pasting <code>CLAUDE.md</code> into{' '}
+           every project, re-registering MCP servers in every
+          agent's JSON, and hoping your laptop and your desktop stay in sync.{' '}
+          <span className="text-white">gaal</span> keeps your skills, MCPs, and
+          repos in one file, then applies them to Claude Code, Cursor, Codex,
+          and 14 other agents with one command.
+        </p>
+
+        <div
+          className="mb-5 flex flex-col items-start gap-4 rise-in"
+          style={{ animationDelay: '240ms' }}
+        >
+          <InstallBlock variant="hero" />
+
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={REPO}
+              target="_blank"
+              rel="noreferrer"
+              className="cta-pair"
+            >
+              <span className="btn-pill primary">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M12 2l2.84 6.72L22 9.82l-5.5 4.86L18 22l-6-3.56L6 22l1.5-7.32L2 9.82l7.16-1.1L12 2z" />
+                </svg>
+                Star on GitHub
+              </span>
+              <span className="btn-chevron primary">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
+              </span>
+            </a>
+
+            <a href="#newsletter" className="btn-pill ghost">
+              Get launch updates
+            </a>
+          </div>
+        </div>
+
+        <p
+          className="mt-6 text-xs text-[var(--fg-dim)] rise-in"
+          style={{ animationDelay: '320ms' }}
+        >
+          macOS · Linux · Windows · or{' '}
+          <code className="text-[var(--fg-muted)]">
+            go install github.com/getgaal/gaal@latest
+          </code>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+function HeroBackdrop() {
+  return (
+    <>
+      {/* Soft lime halo */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 -top-24 h-[420px] w-[420px] rounded-full"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(222,255,154,0.18), transparent 60%)',
+          filter: 'blur(6px)',
+        }}
+      />
+      {/* Subtle constellation dots */}
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-20 h-[520px] w-[520px] opacity-60"
+        viewBox="0 0 500 500"
+      >
+        <defs>
+          <radialGradient id="star-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#DEFF9A" stopOpacity="1" />
+            <stop offset="100%" stopColor="#DEFF9A" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        {SCATTERED_STARS.map((s) => (
+          <circle
+            key={`${s.x}-${s.y}`}
+            cx={s.x}
+            cy={s.y}
+            r={s.r}
+            fill={s.accent ? 'url(#star-grad)' : '#ffffff'}
+            opacity={s.o}
+          />
+        ))}
+        {/* Faint connector lines */}
+        {STAR_LINES.map((l) => (
+          <line
+            key={`${l.x1}-${l.y1}-${l.x2}-${l.y2}`}
+            x1={l.x1}
+            y1={l.y1}
+            x2={l.x2}
+            y2={l.y2}
+            stroke="#ffffff"
+            strokeWidth="0.5"
+            opacity="0.06"
+          />
+        ))}
+      </svg>
+    </>
+  )
+}
+
+const SCATTERED_STARS = [
+  { x: 120, y: 60, r: 2.2, o: 0.8, accent: true },
+  { x: 200, y: 180, r: 1.3, o: 0.6, accent: false },
+  { x: 320, y: 110, r: 1.8, o: 0.7, accent: false },
+  { x: 410, y: 220, r: 2.6, o: 0.9, accent: true },
+  { x: 80, y: 310, r: 1.4, o: 0.5, accent: false },
+  { x: 240, y: 360, r: 1.1, o: 0.4, accent: false },
+  { x: 360, y: 400, r: 2, o: 0.85, accent: true },
+  { x: 460, y: 340, r: 1.3, o: 0.5, accent: false },
+  { x: 170, y: 460, r: 1.5, o: 0.45, accent: false },
+]
+
+const STAR_LINES = [
+  { x1: 120, y1: 60, x2: 200, y2: 180 },
+  { x1: 200, y1: 180, x2: 320, y2: 110 },
+  { x1: 320, y1: 110, x2: 410, y2: 220 },
+  { x1: 410, y1: 220, x2: 460, y2: 340 },
+  { x1: 460, y1: 340, x2: 360, y2: 400 },
+]
+
+/* ======================================================================
+   2. PROBLEM
+   ====================================================================== */
+
+function Problem() {
+  const paths = [
+    {
+      agent: 'Claude Code',
+      files: ['CLAUDE.md', '.claude/settings.json', '.claude/skills/'],
+    },
+    { agent: 'Cursor', files: ['.cursor/rules/'] },
+    { agent: 'Codex', files: ['AGENTS.md'] },
+    {
+      agent: 'MCP servers',
+      files: ['redeclared in each agent\u2019s own JSON'],
+    },
+  ]
+
+  return (
+    <section className="section section-hairline">
+      <div className="page-wrap">
+        <p className="eyebrow mb-6">The problem</p>
+        <h2 className="display mb-10 max-w-4xl">
+          Your AI coding setup is scattered across four tools and three{' '}
+          <span className="accent-word">machines</span>.
+        </h2>
+
+        <div className="grid gap-8 lg:grid-cols-5">
+          <div className="lead max-w-xl lg:col-span-3">
+            <p className="mb-5">
+              You run Claude Code for long tasks, Cursor for inline edits,
+              maybe Codex or Copilot in a browser. Each one reads config from a
+              different place.
+            </p>
+            <p className="mb-5">
+              New machine? Re-clone repos, re-install skills, re-wire every MCP
+              server. Tweak a skill on your laptop and your desktop doesn't
+              know.
+            </p>
+            <p className="text-white">
+              4 agents × 2 machines is{' '}
+              <span className="accent-word">8 places</span> where one source of
+              truth should live. No way to answer{' '}
+              <em className="not-italic text-[var(--fg-muted)]">
+                "is my setup in sync right now?"
+              </em>
+            </p>
+          </div>
+
+          <div className="lg:col-span-2">
+            <ul className="space-y-3">
+              {paths.map((row) => (
+                <li key={row.agent} className="card-inset">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--fg-dim)]">
+                    {row.agent}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {row.files.map((f) => (
+                      <code
+                        key={f}
+                        className="!border-[var(--line)] !bg-black !text-[var(--fg-muted)]"
+                      >
+                        {f}
+                      </code>
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   3. HOW IT WORKS
+   ====================================================================== */
+
+function HowItWorks() {
+  return (
+    <section id="how" className="section section-hairline">
+      <div className="page-wrap">
+        <p className="eyebrow mb-6">How it works</p>
+        <h2 className="display mb-10 max-w-4xl">
+          One file. Three resources. Every{' '}
+          <span className="accent-word">agent</span>.
+        </h2>
+
+        <div className="grid gap-8 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <p className="lead mb-6">
+              gaal reads a single <code>gaal.yaml</code>. It declares three
+              things:
+            </p>
+            <YamlBlock />
+          </div>
+
+          <div className="flex flex-col gap-6 lg:col-span-2">
+            <SequenceItem
+              n={1}
+              title="Repositories"
+              body="Code repos kept cloned and up-to-date at declared paths. Git, Mercurial, SVN, Bazaar, tar, zip."
+            />
+            <SequenceItem
+              n={2}
+              title="Skills"
+              body="SKILL.md collections installed per-project or globally into every agent's skill directory."
+            />
+            <SequenceItem
+              n={3}
+              title="MCP servers"
+              body="Upserted into each agent's native JSON. Non-destructive. Your own entries are preserved."
+            />
+
+            <div className="card mt-2">
+              <p className="eyebrow mb-3">Project vs global</p>
+              <p className="text-sm text-[var(--fg-muted)]">
+                Scope skills per-project (versioned alongside your code) or
+                globally for your user (
+                <code className="!text-[var(--fg-muted)]">
+                  ~/.&lt;agent&gt;/skills/
+                </code>
+                ). gaal itself reads config from three merged scopes (system,
+                user, and the current project), so team defaults don't fight
+                per-project overrides.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p className="lead mt-10 max-w-3xl">
+          Run <code>gaal sync</code>. gaal figures out what each agent needs
+          and writes it to the right place:{' '}
+          <code>CLAUDE.md</code> and <code>.claude/skills/</code> for Claude
+          Code, <code>.cursor/rules/</code> for Cursor, <code>AGENTS.md</code>{' '}
+          for Codex, the right JSON for MCPs. Commit <code>gaal.yaml</code> to
+          a dotfiles repo. On your next machine,{' '}
+          <code>gaal sync</code> makes it identical.
+        </p>
+      </div>
+    </section>
+  )
+}
+
+function SequenceItem({
+  n,
+  title,
+  body,
+}: {
+  n: number
+  title: string
+  body: string
+}) {
+  return (
+    <div className="flex gap-5">
+      <span className="numeral leading-none shrink-0 w-12 text-right">{n}</span>
+      <div>
+        <h3 className="mb-1.5 text-lg font-semibold text-white">{title}</h3>
+        <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{body}</p>
+      </div>
+    </div>
+  )
+}
+
+function YamlBlock() {
+  return (
+    <div className="term">
+      <div className="term-head">
+        <span className="term-dots" aria-hidden="true">
+          <span className="term-dot" />
+          <span className="term-dot" />
+          <span className="term-dot" />
+        </span>
+        <span className="ml-3 text-[var(--fg-muted)]">gaal.yaml</span>
+      </div>
+      <pre className="term-body m-0 overflow-x-auto">
+        <code>
+          <span className="yml-key">schema</span>
+          <span className="yml-punct">:</span> <span className="yml-num">1</span>
+          {'\n\n'}
+          <span className="yml-key">repositories</span>
+          <span className="yml-punct">:</span>
+          {'                              '}
+          <span className="yml-comment"># 1. code repos to keep cloned</span>
+          {'\n  - '}
+          <span className="yml-key">source</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-str">github.com/getgaal/gaal</span>
+          {'\n    '}
+          <span className="yml-key">path</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-str">~/code/gaal</span>
+          {'\n\n'}
+          <span className="yml-key">skills</span>
+          <span className="yml-punct">:</span>
+          {'                                    '}
+          <span className="yml-comment"># 2. AI agent skills</span>
+          {'\n  - '}
+          <span className="yml-key">source</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-str">github.com/obra/superpowers</span>
+          {'\n    '}
+          <span className="yml-key">agents</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-punct">[</span>
+          <span className="yml-str">"*"</span>
+          <span className="yml-punct">]</span>
+          {'                          '}
+          <span className="yml-comment">
+            # auto-detect every installed agent
+          </span>
+          {'\n    '}
+          <span className="yml-key">global</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-bool">true</span>
+          {'                           '}
+          <span className="yml-comment"># shared across projects</span>
+          {'\n\n'}
+          <span className="yml-key">mcps</span>
+          <span className="yml-punct">:</span>
+          {'                                      '}
+          <span className="yml-comment"># 3. MCP servers</span>
+          {'\n  - '}
+          <span className="yml-key">inline</span>
+          <span className="yml-punct">:</span>
+          {'\n      '}
+          <span className="yml-key">mcpServers</span>
+          <span className="yml-punct">:</span>
+          {'\n        '}
+          <span className="yml-key">context7</span>
+          <span className="yml-punct">:</span>
+          {'\n          '}
+          <span className="yml-key">command</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-str">npx</span>
+          {'\n          '}
+          <span className="yml-key">args</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-punct">[</span>
+          <span className="yml-str">"-y"</span>
+          <span className="yml-punct">, </span>
+          <span className="yml-str">"@upstash/context7-mcp"</span>
+          <span className="yml-punct">]</span>
+          {'\n    '}
+          <span className="yml-key">agents</span>
+          <span className="yml-punct">:</span>{' '}
+          <span className="yml-punct">[</span>
+          <span className="yml-str">"claude-code"</span>
+          <span className="yml-punct">, </span>
+          <span className="yml-str">"cursor"</span>
+          <span className="yml-punct">, </span>
+          <span className="yml-str">"codex"</span>
+          <span className="yml-punct">]</span>
+        </code>
+      </pre>
+    </div>
+  )
+}
+
+/* ======================================================================
+   4. TERMINAL DEMO
+   ====================================================================== */
+
+function TerminalDemoSection() {
+  return (
+    <section id="demo" className="section section-hairline">
+      <div className="page-wrap">
+        <p className="eyebrow mb-6">See it run</p>
+        <h2 className="display mb-4 max-w-4xl">
+          60 seconds. Two machines. Zero{' '}
+          <span className="accent-word">copy-paste</span>.
+        </h2>
+        <p className="lead mb-10 max-w-2xl">
+          gaal imports an existing setup on one machine and reproduces it on
+          another. No narration. Just the CLI doing its job.
+        </p>
+
+        <TerminalDemo />
+
+        <p className="mt-8 text-sm text-[var(--fg-muted)]">
+          No server. No account. No telemetry. A single Go binary and a YAML
+          in your dotfiles.
+        </p>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   5. COVERAGE
+   ====================================================================== */
+
+function Coverage() {
+  return (
+    <section id="coverage" className="section section-hairline">
+      <div className="page-wrap">
+        <p className="eyebrow mb-6">Coverage</p>
+        <h2 className="display mb-6 max-w-4xl">
+          17 coding agents.{' '}
+          <span className="accent-word">Auto-detected</span>.
+        </h2>
+        <p className="lead mb-10 max-w-2xl">
+          gaal discovers installed agents automatically. Use{' '}
+          <code>agents: ["*"]</code> and you're done. Register custom agents by
+          pointing gaal at their skill and MCP paths.
+        </p>
+
+        <ul className="mb-16 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {AGENTS.map((name) => (
+            <li key={name} className="agent-chip">
+              <span className="dot" aria-hidden="true" />
+              {name}
+            </li>
+          ))}
+        </ul>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          <ResourceTile
+            n="1"
+            title="Repositories"
+            body="Clone and update local code repos. Git, Mercurial, SVN, Bazaar, tar, zip."
+          />
+          <ResourceTile
+            n="2"
+            title="Skills"
+            body="Install SKILL.md collections per-project or globally. Stay current automatically."
+          />
+          <ResourceTile
+            n="3"
+            title="MCP servers"
+            body="Upsert entries into each agent's native JSON. Non-destructive. Your own entries are preserved."
+          />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ResourceTile({
+  n,
+  title,
+  body,
+}: {
+  n: string
+  title: string
+  body: string
+}) {
+  return (
+    <article className="card-xl">
+      <span className="numeral mb-5 block">{n}</span>
+      <h3 className="mb-2 text-lg font-semibold text-white">{title}</h3>
+      <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{body}</p>
+    </article>
+  )
+}
+
+/* ======================================================================
+   6. TRUST ROW
+   ====================================================================== */
+
+function TrustRow() {
+  const tiles = [
+    {
+      label: 'Open source',
+      body: 'AGPL-3.0. Code on GitHub. Fork it, patch it, send a PR.',
+    },
+    {
+      label: 'Zero telemetry',
+      body: 'Off by default. Opt-in is user-scope only.',
+    },
+    {
+      label: 'Single binary',
+      body: 'Go. No runtime deps. No account. No server.',
+    },
+    {
+      label: '17+ agents',
+      body: 'Auto-detected. Extensible via ~/.config/gaal/agents.yaml.',
+    },
+    {
+      label: 'Works everywhere',
+      body: 'macOS · Linux · Windows.',
+    },
+  ]
+
+  return (
+    <section className="section section-hairline">
+      <div className="page-wrap">
+        <p className="eyebrow mb-10">Why trust it</p>
+
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {tiles.map((t) => (
+            <li
+              key={t.label}
+              className="rounded-2xl border border-[var(--line)] bg-[var(--surface-1)] p-5 transition hover:border-[var(--line-soft)]"
+            >
+              <p className="mb-3 font-mono text-[0.68rem] uppercase tracking-widest text-[var(--accent)]">
+                {t.label}
+              </p>
+              <p className="text-sm leading-relaxed text-[var(--fg-muted)]">
+                {t.body}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+/* ======================================================================
+   7. FINAL CTA + NEWSLETTER
+   ====================================================================== */
+
+function FinalCta() {
+  return (
+    <section id="newsletter" className="section section-hairline">
+      <div className="page-wrap">
+        <p className="eyebrow mb-6">Ready</p>
+        <h2 className="display mb-10 max-w-4xl">
+          Install gaal. Star the{' '}
+          <span className="accent-word">repo</span>.
+        </h2>
+
+        <div className="mb-14 flex flex-col items-start gap-4">
+          <InstallBlock />
+          <a href={REPO} target="_blank" rel="noreferrer" className="cta-pair">
+            <span className="btn-pill secondary">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M12 2l2.84 6.72L22 9.82l-5.5 4.86L18 22l-6-3.56L6 22l1.5-7.32L2 9.82l7.16-1.1L12 2z" />
+              </svg>
+              Star on GitHub
+            </span>
+            <span className="btn-chevron ghost">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </span>
           </a>
         </div>
-      </section>
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          [
-            'Type-Safe Routing',
-            'Routes and links stay in sync across every page.',
-          ],
-          [
-            'Server Functions',
-            'Call server code from your UI without creating API boilerplate.',
-          ],
-          [
-            'Streaming by Default',
-            'Ship progressively rendered responses for faster experiences.',
-          ],
-          [
-            'Tailwind Native',
-            'Design quickly with utility-first styling and reusable tokens.',
-          ],
-        ].map(([title, desc], index) => (
-          <article
-            key={title}
-            className="island-shell feature-card rise-in rounded-2xl p-5"
-            style={{ animationDelay: `${index * 90 + 80}ms` }}
-          >
-            <h2 className="mb-2 text-base font-semibold text-[var(--sea-ink)]">
-              {title}
-            </h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{desc}</p>
-          </article>
-        ))}
-      </section>
+        <div className="card-xl relative overflow-hidden">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(222,255,154,0.18), transparent 66%)',
+            }}
+          />
 
-      <section className="island-shell mt-8 rounded-2xl p-6">
-        <p className="island-kicker mb-2">Quick Start</p>
-        <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
-          <li>
-            Edit <code>src/routes/index.tsx</code> to customize the home page.
-          </li>
-          <li>
-            Update <code>src/components/Header.tsx</code> and{' '}
-            <code>src/components/Footer.tsx</code> for brand links.
-          </li>
-          <li>
-            Add routes in <code>src/routes</code> and tweak visual tokens in{' '}
-            <code>src/styles.css</code>.
-          </li>
-        </ul>
-      </section>
-    </main>
+          <div className="relative grid gap-8 lg:grid-cols-2 lg:items-center">
+            <div>
+              <p className="eyebrow mb-4">Community Edition</p>
+              <h3 className="heading mb-4">
+                Working on a team?{' '}
+                <span className="accent-word">Team sync is next.</span>
+              </h3>
+              <p className="text-[var(--fg-muted)] leading-relaxed">
+                Today <code>gaal</code> syncs from a local YAML you commit to
+                your dotfiles. gaal Community Edition adds a server. Point the
+                same <code>gaal</code> CLI at a shared instance and every
+                teammate syncs from the same source. Same binary, same YAML; a
+                server instead of a git repo.
+              </p>
+            </div>
+
+            <div>
+              <NewsletterForm />
+              <p className="mt-3 text-xs text-[var(--fg-dim)]">
+                No spam. One email when Community Edition ships. One update per
+                month at most.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }

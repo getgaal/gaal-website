@@ -6,27 +6,33 @@ import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
 
-const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark'||stored==='auto')?stored:'auto';var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var resolved=mode==='auto'?(prefersDark?'dark':'light'):mode;var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(resolved);if(mode==='auto'){root.removeAttribute('data-theme')}else{root.setAttribute('data-theme',mode)}root.style.colorScheme=resolved;}catch(e){}})();`
+const BASE = import.meta.env.BASE_URL ?? '/'
+const favicon = `${BASE}favicon.svg?v=2`
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { title: 'gaal · one YAML, every coding agent, every machine' },
       {
-        charSet: 'utf-8',
+        name: 'description',
+        content:
+          'gaal is an open-source CLI that keeps your AI coding agent skills, MCP servers, and repositories in sync across Claude Code, Cursor, Codex, and 14 other agents, from a single YAML file.',
       },
+      { property: 'og:title', content: 'gaal · one YAML, every coding agent, every machine' },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        property: 'og:description',
+        content:
+          'Open-source CLI for solo developers. Sync AI agent skills, MCPs, and repos across 17 coding agents from one YAML.',
       },
-      {
-        title: 'TanStack Start Starter',
-      },
+      { property: 'og:type', content: 'website' },
+      { name: 'theme-color', content: '#000000' },
     ],
     links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
+      { rel: 'stylesheet', href: appCss },
+      { rel: 'icon', type: 'image/svg+xml', href: favicon },
+      { rel: 'apple-touch-icon', href: favicon },
     ],
   }),
   shellComponent: RootDocument,
@@ -34,19 +40,18 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
-        <Header />
-        {children}
-        <Footer />
+      <body className="font-sans antialiased">
+        <div id="app">
+          <Header />
+          {children}
+          <Footer />
+        </div>
         <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
+          config={{ position: 'bottom-right' }}
           plugins={[
             {
               name: 'Tanstack Router',
