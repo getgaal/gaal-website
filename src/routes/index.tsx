@@ -394,10 +394,10 @@ function YamlBlock() {
           <span className="yml-key">schema</span>
           <span className="yml-punct">:</span> <span className="yml-num">1</span>
           {'\n\n'}
+          <span className="yml-comment"># 1. code repos to keep cloned</span>
+          {'\n'}
           <span className="yml-key">repositories</span>
           <span className="yml-punct">:</span>
-          {'                              '}
-          <span className="yml-comment"># 1. code repos to keep cloned</span>
           {'\n  - '}
           <span className="yml-key">source</span>
           <span className="yml-punct">:</span>{' '}
@@ -407,35 +407,35 @@ function YamlBlock() {
           <span className="yml-punct">:</span>{' '}
           <span className="yml-str">~/code/gaal</span>
           {'\n\n'}
+          <span className="yml-comment"># 2. AI agent skills</span>
+          {'\n'}
           <span className="yml-key">skills</span>
           <span className="yml-punct">:</span>
-          {'                                    '}
-          <span className="yml-comment"># 2. AI agent skills</span>
           {'\n  - '}
           <span className="yml-key">source</span>
           <span className="yml-punct">:</span>{' '}
           <span className="yml-str">github.com/obra/superpowers</span>
+          {'\n    '}
+          <span className="yml-comment">
+            # auto-detect every installed agent
+          </span>
           {'\n    '}
           <span className="yml-key">agents</span>
           <span className="yml-punct">:</span>{' '}
           <span className="yml-punct">[</span>
           <span className="yml-str">"*"</span>
           <span className="yml-punct">]</span>
-          {'                          '}
-          <span className="yml-comment">
-            # auto-detect every installed agent
-          </span>
+          {'\n    '}
+          <span className="yml-comment"># shared across projects</span>
           {'\n    '}
           <span className="yml-key">global</span>
           <span className="yml-punct">:</span>{' '}
           <span className="yml-bool">true</span>
-          {'                           '}
-          <span className="yml-comment"># shared across projects</span>
           {'\n\n'}
+          <span className="yml-comment"># 3. MCP servers</span>
+          {'\n'}
           <span className="yml-key">mcps</span>
           <span className="yml-punct">:</span>
-          {'                                      '}
-          <span className="yml-comment"># 3. MCP servers</span>
           {'\n  - '}
           <span className="yml-key">inline</span>
           <span className="yml-punct">:</span>
