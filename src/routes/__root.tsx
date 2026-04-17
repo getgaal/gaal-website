@@ -6,6 +6,9 @@ import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
 
+const BASE = import.meta.env.BASE_URL ?? '/'
+const favicon = `${BASE}favicon.svg?v=2`
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -28,8 +31,8 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=2' },
-      { rel: 'apple-touch-icon', href: '/favicon.svg?v=2' },
+      { rel: 'icon', type: 'image/svg+xml', href: favicon },
+      { rel: 'apple-touch-icon', href: favicon },
     ],
   }),
   shellComponent: RootDocument,
