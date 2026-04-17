@@ -84,7 +84,7 @@ export default function Footer() {
         <span className="ticker-dot">getgaal</span>
         <a
           href="mailto:hello@getgaal.com"
-          className="center ticker-sq text-[#aaaaaa] hover:text-[var(--accent)]"
+          className="center text-[#aaaaaa] hover:text-[var(--accent)]"
         >
           hello@getgaal.com
         </a>
