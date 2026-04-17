@@ -61,7 +61,7 @@ export default function Header() {
             </svg>
             Star on GitHub
           </span>
-          <span className="btn-chevron primary">
+          <span className="btn-chevron primary max-sm:!hidden">
             <svg
               width="14"
               height="14"
