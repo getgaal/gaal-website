@@ -40,6 +40,16 @@ export default function Footer() {
                 Supported agents
               </a>
             </li>
+            <li>
+              <a
+                href="https://docs.getgaal.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-[var(--fg-muted)] hover:text-[var(--accent)]"
+              >
+                Docs
+              </a>
+            </li>
           </ul>
         </div>
 

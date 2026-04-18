@@ -147,6 +147,34 @@ function Hero() {
             go install github.com/getgaal/gaal@latest
           </code>
         </p>
+
+        <div
+          className="mt-5 flex justify-center rise-in sm:justify-start"
+          style={{ animationDelay: '400ms' }}
+        >
+          <a
+            href="https://docs.getgaal.com"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-pill dark"
+          >
+            View the documentation
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   )
