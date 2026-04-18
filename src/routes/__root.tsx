@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
@@ -39,6 +40,15 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    import('@plausible-analytics/tracker/plausible.js').then(({ init }) => {
+      init({
+        domain: 'getgaal.com',
+        endpoint: 'https://usage.getgaal.com/api/event',
+      })
+    })
+  }, [])
+
   return (
     <html lang="en" className="dark">
       <head>
