@@ -277,6 +277,18 @@ a:focus-visible {
   color: var(--accent);
 }
 
+.btn-pill.dark {
+  background: #000;
+  color: var(--fg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-pill.dark:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
 /* Circle chevron companion - canonical CTA pairing */
 .btn-chevron {
   display: inline-flex;

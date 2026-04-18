@@ -33,6 +33,14 @@ export default function Header() {
             Agents
           </a>
           <a
+            href="https://docs.getgaal.com"
+            target="_blank"
+            rel="noreferrer"
+            className="nav-link"
+          >
+            Docs
+          </a>
+          <a
             href={REPO}
             target="_blank"
             rel="noreferrer"
