@@ -8,7 +8,7 @@ import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 // Project Pages live under /<repo>/. Override with BASE_PATH=/ for a custom domain.
-const base = process.env.BASE_PATH ?? '/gaal-website/'
+const base = process.env.BASE_PATH ?? '/'
 
 const config = defineConfig({
   base,
