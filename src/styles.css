@@ -7,7 +7,8 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-:root {
+:root,
+:root[data-theme='dark'] {
   /* Dark Particles. Design tokens from DESIGN.md */
   --bg: #000000;
   --fg: #ffffff;
@@ -29,6 +30,55 @@
   --data-mint: #4cdc8b;
   --data-blue: #4c7fdc;
   --error: #e46962;
+  /* Helpers that invert per-theme so the same markup reads on both canvases */
+  --bg-scrim: rgba(0, 0, 0, 0.8);
+  --on-accent: #000000; /* text color sitting on a lime fill */
+  --dust: rgba(255, 255, 255, 0.18);
+  --dust-soft: rgba(255, 255, 255, 0.1);
+  --dust-accent: rgba(222, 255, 154, 0.2);
+  --grid: rgba(255, 255, 255, 1);
+  --grid-opacity: 0.06;
+  --mask-fill: #fff;
+  --star: #ffffff;
+  --outline: rgba(255, 255, 255, 0.2);
+  --outline-strong: rgba(255, 255, 255, 0.25);
+}
+
+/* Light theme — "Paper Particles". Inverts the canvas while keeping the
+   single-accent discipline: lime becomes a darker olive (#3E5A12) so the
+   emphasis reads on white — per DESIGN.md "Don't place lime text on white". */
+:root[data-theme='light'] {
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --fg-muted: #4a4a4a;
+  --fg-dim: #6f6f6f;
+  --accent: #3e5a12;
+  --accent-hover: #2c4109;
+  --accent-ink: #ffffff;
+  --accent-halo: rgba(62, 90, 18, 0.28);
+  --accent-ring: rgba(62, 90, 18, 0.22);
+  --surface-0: #fafafa;
+  --surface-1: #f4f4f4;
+  --surface-2: #ececec;
+  --card: #f5f5f5;
+  --card-raised: #ebebeb;
+  --card-edge: #d8d8d8;
+  --line: #e4e4e4;
+  --line-soft: rgba(0, 0, 0, 0.08);
+  --data-mint: #2e9a5c;
+  --data-blue: #2a5bc0;
+  --error: #c0392b;
+  --bg-scrim: rgba(255, 255, 255, 0.82);
+  --on-accent: #ffffff;
+  --dust: rgba(10, 10, 10, 0.08);
+  --dust-soft: rgba(10, 10, 10, 0.05);
+  --dust-accent: rgba(62, 90, 18, 0.12);
+  --grid: rgba(10, 10, 10, 1);
+  --grid-opacity: 0.04;
+  --mask-fill: #000;
+  --star: #0a0a0a;
+  --outline: rgba(10, 10, 10, 0.14);
+  --outline-strong: rgba(10, 10, 10, 0.22);
 }
 
 * {
@@ -46,6 +96,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html[data-theme='light'] {
+  color-scheme: light;
+}
+
 body {
   margin: 0;
   color: var(--fg);
@@ -54,9 +108,9 @@ body {
   font-feature-settings: "ss01", "cv11";
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse 1200px 600px at 18% -8%, rgba(222, 255, 154, 0.05), transparent 55%),
-    radial-gradient(ellipse 1000px 520px at 108% 22%, rgba(76, 220, 139, 0.04), transparent 60%),
-    radial-gradient(ellipse 900px 500px at 50% 120%, rgba(222, 255, 154, 0.03), transparent 68%);
+    radial-gradient(ellipse 1200px 600px at 18% -8%, var(--dust-accent), transparent 55%),
+    radial-gradient(ellipse 1000px 520px at 108% 22%, var(--dust-soft), transparent 60%),
+    radial-gradient(ellipse 900px 500px at 50% 120%, var(--dust-accent), transparent 68%);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -70,12 +124,12 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.18) 0%, transparent 0.6%),
-    radial-gradient(circle at 72% 28%, rgba(255, 255, 255, 0.12) 0%, transparent 0.5%),
-    radial-gradient(circle at 38% 52%, rgba(222, 255, 154, 0.2) 0%, transparent 0.4%),
-    radial-gradient(circle at 88% 62%, rgba(255, 255, 255, 0.14) 0%, transparent 0.5%),
-    radial-gradient(circle at 22% 78%, rgba(255, 255, 255, 0.1) 0%, transparent 0.5%),
-    radial-gradient(circle at 62% 88%, rgba(222, 255, 154, 0.16) 0%, transparent 0.4%);
+    radial-gradient(circle at 12% 18%, var(--dust) 0%, transparent 0.6%),
+    radial-gradient(circle at 72% 28%, var(--dust-soft) 0%, transparent 0.5%),
+    radial-gradient(circle at 38% 52%, var(--dust-accent) 0%, transparent 0.4%),
+    radial-gradient(circle at 88% 62%, var(--dust) 0%, transparent 0.5%),
+    radial-gradient(circle at 22% 78%, var(--dust-soft) 0%, transparent 0.5%),
+    radial-gradient(circle at 62% 88%, var(--dust-accent) 0%, transparent 0.4%);
   background-size: 100% 100%;
   opacity: 0.9;
   mask-image: radial-gradient(ellipse at 50% 30%, black, transparent 85%);
@@ -88,10 +142,10 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.06;
+  opacity: var(--grid-opacity);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px);
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse at 50% 30%, black, transparent 70%);
 }
@@ -269,7 +323,7 @@ a:focus-visible {
 .btn-pill.ghost {
   background: transparent;
   color: var(--fg);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--outline);
 }
 
 .btn-pill.ghost:hover {
@@ -278,9 +332,9 @@ a:focus-visible {
 }
 
 .btn-pill.dark {
-  background: #000;
+  background: var(--bg);
   color: var(--fg);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--outline);
 }
 
 .btn-pill.dark:hover {
@@ -313,7 +367,7 @@ a:focus-visible {
 
 .btn-chevron.ghost {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--outline-strong);
   color: var(--fg);
 }
 
@@ -373,14 +427,23 @@ a:focus-visible {
 
 /* ==================== Terminal / code block ==================== */
 
+/* Terminals stay dark in both themes — they represent a shell and the
+   design system explicitly allows dark "onyx" islands on a bright canvas. */
 .term {
-  background: #0c0c0c;
-  border: 1px solid var(--line);
+  --term-bg: #0c0c0c;
+  --term-head: #0a0a0a;
+  --term-fg: #ffffff;
+  --term-fg-muted: #c8c8c8;
+  --term-fg-dim: #8a8a8a;
+  --term-line: #262626;
+  background: var(--term-bg);
+  border: 1px solid var(--term-line);
   border-radius: 16px;
   overflow: hidden;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   line-height: 1.6;
+  color: var(--term-fg);
 }
 
 .term.accented {
@@ -412,10 +475,10 @@ a:focus-visible {
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
-  border-bottom: 1px solid var(--line);
-  background: #0a0a0a;
+  border-bottom: 1px solid var(--term-line);
+  background: var(--term-head);
   font-size: 0.75rem;
-  color: var(--fg-dim);
+  color: var(--term-fg-dim);
 }
 
 .term-dots {
@@ -436,43 +499,47 @@ a:focus-visible {
 
 .term-body {
   padding: 22px 24px;
-  color: var(--fg);
+  color: var(--term-fg);
   overflow-x: auto;
 }
 
+/* Terminal signals keep their lime/mint accents on the dark shell surface
+   regardless of page theme — lime-on-black is the dark-first signature. */
 .term-prompt {
-  color: var(--accent);
+  color: #deff9a;
   user-select: none;
 }
 
 .term-cmd {
-  color: var(--fg);
+  color: var(--term-fg);
   font-weight: 500;
 }
 
 .term-out {
-  color: var(--fg-muted);
+  color: var(--term-fg-muted);
 }
 
 .term-ok {
-  color: var(--data-mint);
+  color: #4cdc8b;
 }
 
 .term-arrow {
-  color: var(--accent);
+  color: #deff9a;
 }
 
 .term-comment {
-  color: var(--fg-dim);
+  color: var(--term-fg-dim);
 }
 
 /* YAML syntax tones */
 .yml-key { color: var(--accent); font-weight: 500; }
-.yml-str { color: #e5f4c7; }
-.yml-num { color: var(--data-blue); }
-.yml-bool { color: var(--data-mint); }
-.yml-comment { color: var(--fg-dim); font-style: italic; }
-.yml-punct { color: var(--fg-dim); }
+/* YAML tones sit inside the dark terminal surface — keep them theme-invariant. */
+.term .yml-key { color: #deff9a; }
+.term .yml-str { color: #e5f4c7; }
+.term .yml-num { color: #4c7fdc; }
+.term .yml-bool { color: #4cdc8b; }
+.term .yml-comment { color: #8a8a8a; font-style: italic; }
+.term .yml-punct { color: #8a8a8a; }
 
 /* ==================== Animations ==================== */
 
@@ -632,7 +699,7 @@ a:focus-visible {
   font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: #aaaaaa;
+  color: var(--fg-dim);
 }
 
 .footer-ticker .center {

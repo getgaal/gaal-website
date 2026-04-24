@@ -9,9 +9,9 @@ export default function Footer() {
         <div className="sm:col-span-2">
           <div className="mb-3 flex items-center gap-2">
             <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--accent)]">
-              <span className="h-1 w-1 rounded-full bg-black" />
+              <span className="h-1 w-1 rounded-full bg-[var(--on-accent)]" />
             </span>
-            <span className="text-base font-semibold text-white">gaal</span>
+            <span className="text-base font-semibold text-[var(--fg)]">gaal</span>
           </div>
           <p className="max-w-md text-sm text-[var(--fg-muted)]">
             One YAML. Every coding agent. Every machine. The Governed Agent
@@ -94,7 +94,7 @@ export default function Footer() {
         <span className="ticker-dot">getgaal</span>
         <a
           href="mailto:hello@getgaal.com"
-          className="center text-[#aaaaaa] hover:text-[var(--accent)]"
+          className="center text-[var(--fg-dim)] hover:text-[var(--accent)]"
         >
           hello@getgaal.com
         </a>

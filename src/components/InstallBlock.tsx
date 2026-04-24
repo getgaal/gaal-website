@@ -32,7 +32,7 @@ export default function InstallBlock({
         <span className="term-prompt select-none" aria-hidden="true">
           $
         </span>
-        <span className="term-cmd min-w-0 flex-1 truncate text-white">
+        <span className="term-cmd min-w-0 flex-1 truncate">
           {INSTALL_CMD}
         </span>
       </div>

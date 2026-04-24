@@ -35,7 +35,7 @@ export default function NewsletterForm() {
   if (status === 'success') {
     return (
       <div className="flex items-center gap-3 rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-5 py-4 text-sm">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent)] text-black">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--accent)] text-[var(--on-accent)]">
           <svg
             width="14"
             height="14"
@@ -52,7 +52,7 @@ export default function NewsletterForm() {
           </svg>
         </span>
         <span>
-          <span className="font-semibold text-white">You're on the list.</span>{' '}
+          <span className="font-semibold text-[var(--fg)]">You're on the list.</span>{' '}
           <span className="text-[var(--fg-muted)]">
             We'll email you when Community Edition ships.
           </span>
