@@ -10,6 +10,11 @@ import appCss from '../styles.css?url'
 const BASE = import.meta.env.BASE_URL ?? '/'
 const favicon = `${BASE}favicon.svg?v=2`
 
+// Inline script injected before hydration so the resolved theme is applied
+// before the first paint — avoids a flash of the wrong palette for users
+// whose stored preference (or OS preference) doesn't match the SSR default.
+const THEME_BOOT = `(()=>{try{var s=localStorage.getItem('gaal-theme');var p=s==='light'||s==='dark'||s==='system'?s:'system';var r=p==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):p;var h=document.documentElement;h.setAttribute('data-theme',r);h.dataset.themePref=p;}catch(e){}})();`
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -50,9 +55,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" data-theme="dark">
       <head>
         <HeadContent />
+        {/* Inline pre-hydration theme boot. eslint-disable-next-line react/no-danger */}
+        {/* eslint-disable-next-line react/no-danger */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
       </head>
       <body className="font-sans antialiased">
         <div id="app">

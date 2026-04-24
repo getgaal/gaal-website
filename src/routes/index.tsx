@@ -83,7 +83,7 @@ function Hero() {
           Stop copy-pasting <code>CLAUDE.md</code> into{' '}
            every project, re-registering MCP servers in every
           agent's JSON, and hoping your laptop and your desktop stay in sync.{' '}
-          <span className="text-white">gaal</span> keeps your skills, MCPs, and
+          <span className="text-[var(--fg)]">gaal</span> keeps your skills, MCPs, and
           repos in one file, then applies them to Claude Code, Cursor, Codex,
           and 14 other agents with one command.
         </p>
@@ -201,7 +201,7 @@ function HeroBackdrop() {
             cx={s.x}
             cy={s.y}
             r={s.r}
-            fill={s.accent ? 'url(#star-grad)' : '#ffffff'}
+            fill={s.accent ? 'url(#star-grad)' : 'var(--star)'}
             opacity={s.o}
           />
         ))}
@@ -213,7 +213,7 @@ function HeroBackdrop() {
             y1={l.y1}
             x2={l.x2}
             y2={l.y2}
-            stroke="#ffffff"
+            stroke="var(--star)"
             strokeWidth="0.5"
             opacity="0.06"
           />
@@ -282,7 +282,7 @@ function Problem() {
               server. Tweak a skill on your laptop and your desktop doesn't
               know.
             </p>
-            <p className="text-white">
+            <p className="text-[var(--fg)]">
               4 agents × 2 machines is{' '}
               <span className="accent-word">8 places</span> where one source of
               truth should live. No way to answer{' '}
@@ -303,7 +303,7 @@ function Problem() {
                     {row.files.map((f) => (
                       <code
                         key={f}
-                        className="!border-[var(--line)] !bg-black !text-[var(--fg-muted)]"
+                        className="!border-[var(--line)] !bg-[var(--bg)] !text-[var(--fg-muted)]"
                       >
                         {f}
                       </code>
@@ -402,7 +402,7 @@ function SequenceItem({
     <div className="flex gap-5">
       <span className="numeral leading-none shrink-0 w-12 text-right">{n}</span>
       <div>
-        <h3 className="mb-1.5 text-lg font-semibold text-white">{title}</h3>
+        <h3 className="mb-1.5 text-lg font-semibold text-[var(--fg)]">{title}</h3>
         <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{body}</p>
       </div>
     </div>
@@ -670,7 +670,7 @@ function InstallCard({
       <p className="font-mono text-[0.68rem] uppercase tracking-widest text-[var(--accent)]">
         {label}
       </p>
-      <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-0)] px-4 py-3 font-mono text-[0.82rem] text-white">
+      <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-0)] px-4 py-3 font-mono text-[0.82rem] text-[var(--fg)]">
         <span className="term-prompt mr-2 select-none" aria-hidden="true">
           $
         </span>
@@ -772,7 +772,7 @@ function ResourceTile({
   return (
     <article className="card-xl">
       <span className="numeral mb-5 block">{n}</span>
-      <h3 className="mb-2 text-lg font-semibold text-white">{title}</h3>
+      <h3 className="mb-2 text-lg font-semibold text-[var(--fg)]">{title}</h3>
       <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{body}</p>
     </article>
   )
