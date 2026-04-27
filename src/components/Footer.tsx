@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router'
+
 const REPO = 'https://github.com/getgaal/gaal'
 
 export default function Footer() {
@@ -23,22 +25,31 @@ export default function Footer() {
           <p className="eyebrow mb-4">Product</p>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="#demo" className="text-[var(--fg-muted)] hover:text-[var(--accent)]">
+              <Link
+                to="/"
+                hash="demo"
+                className="text-[var(--fg-muted)] hover:text-[var(--accent)]"
+              >
                 Demo
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#how" className="text-[var(--fg-muted)] hover:text-[var(--accent)]">
+              <Link
+                to="/"
+                hash="how"
+                className="text-[var(--fg-muted)] hover:text-[var(--accent)]"
+              >
                 How it works
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#coverage"
+              <Link
+                to="/"
+                hash="coverage"
                 className="text-[var(--fg-muted)] hover:text-[var(--accent)]"
               >
                 Supported agents
-              </a>
+              </Link>
             </li>
             <li>
               <a
@@ -85,6 +96,22 @@ export default function Footer() {
               >
                 License · AGPL-3.0
               </a>
+            </li>
+            <li>
+              <Link
+                to="/privacy"
+                className="text-[var(--fg-muted)] hover:text-[var(--accent)]"
+              >
+                Privacy
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/terms"
+                className="text-[var(--fg-muted)] hover:text-[var(--accent)]"
+              >
+                Terms
+              </Link>
             </li>
           </ul>
         </div>
