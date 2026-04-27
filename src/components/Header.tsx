@@ -24,15 +24,15 @@ export default function Header() {
         </Link>
 
         <div className="ml-auto hidden items-center gap-6 sm:flex">
-          <a href="#demo" className="nav-link">
+          <Link to="/" hash="demo" className="nav-link">
             Demo
-          </a>
-          <a href="#how" className="nav-link">
+          </Link>
+          <Link to="/" hash="how" className="nav-link">
             How it works
-          </a>
-          <a href="#coverage" className="nav-link">
+          </Link>
+          <Link to="/" hash="coverage" className="nav-link">
             Agents
-          </a>
+          </Link>
           <a
             href="https://docs.getgaal.com"
             target="_blank"

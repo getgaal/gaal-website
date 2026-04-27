@@ -17,7 +17,11 @@ const config = defineConfig({
     tsconfigPaths({ projects: ['./tsconfig.json'] }),
     tailwindcss(),
     tanstackStart({
-      pages: [{ path: '/' }, { path: '/about' }],
+      pages: [
+        { path: '/' },
+        { path: '/privacy' },
+        { path: '/terms' },
+      ],
       prerender: { enabled: true, crawlLinks: true },
       spa: { enabled: true },
     }),
