@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "vite build && node scripts/generate-sitemap.mjs",
+    "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run"
   },
@@ -37,6 +37,7 @@
     "jsdom": "^28.1.0",
     "typescript": "^5.7.2",
     "vite": "^7.3.1",
+    "vite-plugin-sitemap": "^0.8.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5"
   },
